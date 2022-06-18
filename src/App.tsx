@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, defaultTheme, GlobalStyle } from 'global-styles';
 import StreamersEventPage from 'pages/StreamersEventPage';
