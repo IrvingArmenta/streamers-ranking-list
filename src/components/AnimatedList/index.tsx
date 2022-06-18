@@ -8,13 +8,14 @@ import ErrorBoundary from 'components/ErrorBoundary';
 const AnimatedList = <T extends { userID: string }>(
   props: AnimatedListProps<T>
 ) => {
-  const { items, renderItem, ...rest } = props;
+  const { items, renderItem, itemsExpectedLength, ...rest } = props;
 
   const itemRefs = useRef<Record<string, HTMLLIElement>>({});
   const [boundingBox, setBoundingBox] = useState<Record<string, DOMRect>>({});
   const [prevBoundingBox, setPrevBoundingBox] = useState<
     Record<string, DOMRect>
   >({});
+
   const prevItems = usePrev(items);
 
   useLayoutEffect(() => {
@@ -46,37 +47,31 @@ const AnimatedList = <T extends { userID: string }>(
             requestAnimationFrame(() => {
               domNode.style.transform = '';
               domNode.style.transition =
-                'transform 280ms cubic-bezier(0.680, -0.550, 0.265, 1.550)';
+                'transform 300ms cubic-bezier(0.680, -0.550, 0.265, 1.550)';
             });
           });
         }
       });
     }
-  }, [boundingBox, prevBoundingBox, itemRefs]);
-
-  useEffect(() => {
-    if (Object.keys(itemRefs).length) {
-      items.forEach((item) => {
-        requestAnimationFrame(() => {
-          console.log(item);
-        });
-      });
-    }
-  }, [itemRefs]);
+  }, [boundingBox, prevBoundingBox, items]);
 
   return (
     <ErrorBoundary>
       <ol {...rest}>
-        {items.map((item) => {
-          const getRef = (el: HTMLLIElement) =>
-            (itemRefs.current[item.userID] = el);
+        {items.length
+          ? items.map((item) => {
+              const getRef = (el: HTMLLIElement) =>
+                (itemRefs.current[item.userID] = el);
 
-          return (
-            <li key={item.userID} ref={getRef}>
-              {renderItem(item)}
-            </li>
-          );
-        })}
+              return (
+                <li key={item.userID} ref={getRef}>
+                  {renderItem(item)}
+                </li>
+              );
+            })
+          : Array(itemsExpectedLength)
+              .fill(undefined)
+              .map((n, i) => <li key={i}>{renderItem(n)}</li>)}
       </ol>
     </ErrorBoundary>
   );

@@ -2,8 +2,8 @@ import React, { FC, useEffect, useState } from 'react';
 import AnimatedList from 'components/AnimatedList';
 import { randomUpdateStreamerArray } from 'api/api-utils';
 import { StreamerArrayType } from 'api/types';
-import StreamerCard from 'components/StreamerCard';
-import ErrorBoundary from 'components/ErrorBoundary';
+import { StreamerCard, ErrorBoundary } from 'components';
+import StreamerCardStyled from 'components/StreamerCard/styles';
 
 const RankingList: FC<{ data: StreamerArrayType }> = (props) => {
   const { data } = props;
@@ -25,7 +25,6 @@ const RankingList: FC<{ data: StreamerArrayType }> = (props) => {
   useEffect(() => {
     if (localStreamerData.length) {
       const tickId = setInterval(updateLocalArray, 400);
-
       return () => {
         clearInterval(tickId);
       };
@@ -37,7 +36,16 @@ const RankingList: FC<{ data: StreamerArrayType }> = (props) => {
       <AnimatedList
         className="ranking-list"
         items={localStreamerData}
+        itemsExpectedLength={10}
         renderItem={(streamerProps) => {
+          // fetching data for items...
+          if (!streamerProps) {
+            return (
+              <StreamerCardStyled className="streamer-card" $loading={true}>
+                loading...
+              </StreamerCardStyled>
+            );
+          }
           return <StreamerCard {...streamerProps} />;
         }}
       />

@@ -2,14 +2,9 @@ import React, { useEffect, useState, memo, FC } from 'react';
 import { AnimateCounterPropsType } from './types';
 
 const AnimateCounterFC: FC<AnimateCounterPropsType> = (props) => {
-  const { value } = props;
-  //const [targetVal, setTargetVal] = useState(value);
+  const { value, className } = props;
   const [currentVal, setCurrentVal] = useState(value);
   const [step, setStep] = useState(0);
-
-  // useEffect(() => {
-  //   setTargetVal(value);
-  // }, [value]);
 
   useEffect(() => {
     setStep((value - currentVal) / Math.ceil(400 / 16));
@@ -25,7 +20,7 @@ const AnimateCounterFC: FC<AnimateCounterPropsType> = (props) => {
     return () => clearTimeout(timeout_id);
   }, [value, currentVal, step]);
 
-  return <span>{Math.floor(currentVal)}</span>;
+  return <span className={className}>{Math.floor(currentVal)}</span>;
 };
 
 const AnimateCounter = memo(
