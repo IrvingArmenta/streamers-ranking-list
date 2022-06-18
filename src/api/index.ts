@@ -14,3 +14,4 @@ async function api(url: string) {
 }
 
 export default api;
+export { default as useApi } from './hook';
