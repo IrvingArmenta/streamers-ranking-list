@@ -4,12 +4,20 @@ import StreamerCardStyled from './styles';
 import AnimateCounter from 'components/AnimateCounter';
 
 const StreamerCardFC: FC<StreamerPropsType> = (props) => {
-  const { displayName, userID, score, picture } = props;
+  const { displayName, score, picture } = props;
+
   return (
-    <StreamerCardStyled id={userID}>
-      <img alt={`${displayName} avatar`} src={picture} />
-      {displayName}
-      <AnimateCounter value={score} />
+    <StreamerCardStyled className="streamer-card">
+      <img
+        className="streamer-card__img"
+        alt={`${displayName} avatar`}
+        src={picture}
+      />
+      <h3 className="streamer-card__name">{displayName}</h3>
+      <span className="streamer-card__score">
+        <AnimateCounter value={score} />
+        pt
+      </span>
     </StreamerCardStyled>
   );
 };

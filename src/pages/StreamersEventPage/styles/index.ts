@@ -7,6 +7,9 @@ const StreamersListPageStyled = styled.section`
   height: 100vh;
   width: 100vw;
   flex-direction: column;
+  h1 {
+    color: ${(p) => p.theme.colors.text};
+  }
   .ranking-list {
     list-style: none;
     padding: 0;

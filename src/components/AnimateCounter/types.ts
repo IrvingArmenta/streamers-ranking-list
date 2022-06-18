@@ -1,1 +1,1 @@
-export type AnimateCounterPropsType = { value: number };
+export type AnimateCounterPropsType = { value: number; className?: string };
