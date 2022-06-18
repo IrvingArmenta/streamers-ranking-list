@@ -22,10 +22,10 @@ function useApi(url?: string) {
           if (incomingData) {
             setData(incomingData);
           }
-        } catch (error: unknown) {
+        } catch (error) {
           if (currentEnv.isDevelopment) {
             const typedError = error as Error;
-            console.error('fetching failed', typedError.message);
+            console.error('fetching failed', typedError, typedError.message);
           }
         } finally {
           setIsFetching(false);

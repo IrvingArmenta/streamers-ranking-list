@@ -16,17 +16,18 @@ export function genRandomNumb(min: number, max: number) {
 // function to randomly update the streamer array,
 // specifically the score of randomly number of streamers
 export function randomUpdateStreamerArray(array: StreamerArrayType) {
+  // immutability
   const newArr = [...array];
 
   for (let i = 0; i < genRandomNumb(1, 4); i++) {
-    const n = genRandomNumb(0, newArr.length - 1);
+    const randomN = genRandomNumb(0, newArr.length - 1);
 
     const randomModelById = newArr.find((model) => {
-      return model.userID === newArr[n].userID;
+      return model.userID === newArr[randomN].userID;
     });
 
     if (randomModelById) {
-      randomModelById.score = randomModelById.score + genRandomNumb(10, 1000);
+      randomModelById.score = randomModelById.score + genRandomNumb(10, 88888);
     }
   }
 
