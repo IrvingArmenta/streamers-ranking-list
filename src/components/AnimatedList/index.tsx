@@ -70,7 +70,7 @@ const AnimatedList = <T extends { userID: string }>(
               );
             })
           : Array(itemsExpectedLength)
-              .fill(undefined)
+              .fill(null)
               .map((n, i) => <li key={i}>{renderItem(n)}</li>)}
       </ol>
     </ErrorBoundary>
