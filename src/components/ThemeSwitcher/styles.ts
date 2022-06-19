@@ -13,6 +13,7 @@ const ThemeSwitcherStyled = styled.form`
 
   label,
   input {
+    text-transform: capitalize;
     cursor: pointer;
   }
 `;

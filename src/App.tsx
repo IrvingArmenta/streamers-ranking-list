@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { darkTheme, defaultTheme, GlobalStyle } from 'global-styles';
+import { GlobalStyle } from 'global-styles';
 import StreamersEventPage from 'pages/StreamersEventPage';
 import ThemeSwitcher from 'components/ThemeSwitcher';
+import { checkLSAndSetTheme } from 'utils';
 
 function App() {
-  // TODO - localStorage setup
-  const [themeState, setThemeState] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? darkTheme
-      : defaultTheme
-  );
+  const [themeState, setThemeState] = useState(() => checkLSAndSetTheme());
 
   return (
     <ThemeProvider theme={themeState}>

@@ -3,40 +3,42 @@ import React, { FC } from 'react';
 import { DefaultTheme, useTheme } from 'styled-components';
 import ThemeSwitcherStyled from './styles';
 
+const themeChoices = ['light', 'dark'];
+
 const ThemeSwitcher: FC<{
   setTheme: React.Dispatch<React.SetStateAction<DefaultTheme>>;
 }> = (props) => {
   const { setTheme } = props;
-  const theme = useTheme();
+  const styledTheme = useTheme();
+
+  const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedTheme = e.target.value === 'light' ? defaultTheme : darkTheme;
+
+    setTheme(selectedTheme);
+    localStorage.setItem('streamers-ranking-list/theme', e.target.value);
+  };
 
   return (
     <ThemeSwitcherStyled>
       <fieldset>
         <legend>Theme Switcher</legend>
 
-        <div>
-          <input
-            type="radio"
-            id="lightTheme"
-            name="currentTheme"
-            value="light"
-            checked={theme.themeName === 'light'}
-            onChange={() => setTheme(defaultTheme)}
-          />
-          <label htmlFor="lightTheme">Light</label>
-        </div>
-
-        <div>
-          <input
-            type="radio"
-            id="darkTheme"
-            name="currentTheme"
-            value="dark"
-            checked={theme.themeName === 'dark'}
-            onChange={() => setTheme(darkTheme)}
-          />
-          <label htmlFor="darkTheme">Dark</label>
-        </div>
+        {themeChoices.map((themeName) => {
+          const id = `${themeName}Theme`;
+          return (
+            <div key={id}>
+              <input
+                type="radio"
+                id={id}
+                name="currentTheme"
+                value={themeName}
+                checked={styledTheme.themeName === themeName}
+                onChange={handleThemeChange}
+              />
+              <label htmlFor={id}>{themeName}</label>
+            </div>
+          );
+        })}
       </fieldset>
     </ThemeSwitcherStyled>
   );
