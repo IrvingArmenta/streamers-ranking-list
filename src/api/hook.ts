@@ -14,6 +14,7 @@ function useApi(url?: string) {
       const handlingAsync = async () => {
         setIsFetching(true);
 
+        // faking fetching time
         await sleep(1000);
 
         try {
