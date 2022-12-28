@@ -1,8 +1,8 @@
-import React from 'react';
 import ErrorBoundary from 'components/ErrorBoundary';
 import { useApi } from 'api';
 import StreamersListPageStyled from './styles';
-import RankingList from './components/RankingList';
+import { RankingList } from './components';
+import { Suspense } from 'react';
 
 function StreamersListPage() {
   // fetching data on mount
@@ -12,7 +12,9 @@ function StreamersListPage() {
     <ErrorBoundary>
       <StreamersListPageStyled>
         <h1>Event Streamers Ranking List</h1>
-        <RankingList data={data} />
+        <Suspense fallback={<p>Loading...</p>}>
+          <RankingList data={data} />
+        </Suspense>
       </StreamersListPageStyled>
     </ErrorBoundary>
   );

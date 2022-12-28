@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { type FC, memo } from 'react';
 import { StreamerPropsType } from 'api/types';
 import StreamerCardStyled from './styles';
 import AnimateCounter from 'components/AnimateCounter';

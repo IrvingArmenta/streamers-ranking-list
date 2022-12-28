@@ -1,10 +1,10 @@
 import { darkTheme, defaultTheme } from 'global-styles';
 
-const checkLSAndSetTheme = () => {
-  const localStorageTheme = localStorage.getItem(
-    'streamers-ranking-list/theme'
-  );
+const localStorageTheme = localStorage.getItem(
+  'streamers-ranking-list/theme'
+);
 
+const checkLSAndSetTheme = () => {
   if (localStorageTheme) {
     return localStorageTheme === 'light' ? defaultTheme : darkTheme;
   }

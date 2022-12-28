@@ -1,5 +1,4 @@
-import React, { ReactNode } from 'react';
-import { Component, ErrorInfo } from 'react';
+import { type ReactNode, Component, type ErrorInfo } from 'react';
 import { currentEnv } from 'utils';
 
 class ErrorBoundary extends Component<

@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import AnimatedList from 'components/AnimatedList';
 import { randomUpdateStreamerArray } from 'api/api-utils';
 import { StreamerArrayType } from 'api/types';
 import { StreamerCard, ErrorBoundary } from 'components';
 import StreamerCardStyled from 'components/StreamerCard/styles';
 
-const RankingList: FC<{ data: StreamerArrayType }> = (props) => {
+export const RankingList: FC<{ data: StreamerArrayType }> = (props) => {
   const { data } = props;
   const [localStreamerData, setLocalStreamerData] = useState<StreamerArrayType>(
     []
